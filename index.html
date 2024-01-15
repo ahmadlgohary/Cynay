@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        background-color: #303331;
+        
+    }
+    
+    body span{
+        position: absolute;
+        bottom: -50px;
+        background: transparent;
+        border-radius: 50%;
+        pointer-events: none;
+        box-shadow: inset 0 0 10px rgba(255,255,255,0.5);
+        animation: animate 10s linear infinite;
+    }
+    body span:before{
+        content:'';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        transform: scale(0.25) translate(-70%,-70%);
+        background: radial-gradient(#fff, transparent);
+        border-radius: 50%;
+
+    }
+    @keyframes animate{
+        0%{
+            transform: translateY(0%);
+            opacity: 1;
+        }
+        99%{
+            opacity: 1;
+        }
+        100%{
+            transform: translateY(-1500%);
+            opacity: 0;
+        }
+    }
+
+</style>
+<body>
+
+</body>
+<script>
+    function colorPicker(){
+        let num = Math.floor(Math.random()*4 +1)
+        switch (num) {
+            case 1:
+              color = "rgba(0,150,57, 0.4)"; //green
+              break;
+            case 2:
+               color = "rgba(255,255,255,0.4)";// white
+              break;
+            case 3:
+              color = "rgba(0,0,0,0.4)"; // black
+              break;
+            case 4:
+              color = "rgba(237,46,56,0.4)";//red
+              break;
+        }
+        return color
+    }
+    function createBubbles(){
+        const body = document.querySelector('body');
+        const bubble = document.createElement('span');
+        let size = Math.random() *30;
+        bubble.style.width = 50 + size + 'px';
+        bubble.style.height = 50 + size + 'px';
+        bubble.style.backgroundColor = colorPicker();
+        bubble.style.left = Math.random() * innerWidth-30 +'px';
+        
+        body.appendChild(bubble);
+        setTimeout(()=> { bubble.remove() }, 9900)
+    }
+    var tt = setInterval(createBubbles,90)
+    setTimeout(function() { clearInterval(tt); }, 361);//3000
+</script>
+</html>
